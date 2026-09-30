@@ -180,7 +180,7 @@ p {
   border-color: var(--rust);
 }
 
-@media (max-width: 760px) {
+@media screen and (max-width: 760px) {
   .nav-toggle {
     display: block;
   }
@@ -315,7 +315,7 @@ section {
   color: var(--rust);
 }
 
-@media (max-width: 860px) {
+@media screen and (max-width: 860px) {
   .hero .wrap {
     grid-template-columns: 1fr;
   }
@@ -365,7 +365,7 @@ section {
   margin-top: 3rem;
 }
 
-@media (max-width: 860px) {
+@media screen and (max-width: 860px) {
   .grid-3 {
     grid-template-columns: 1fr;
   }
@@ -427,7 +427,7 @@ section {
   order: 2;
 }
 
-@media (max-width: 860px) {
+@media screen and (max-width: 860px) {
   .split {
     grid-template-columns: 1fr;
   }
@@ -509,7 +509,7 @@ blockquote {
   color: var(--ink-soft);
 }
 
-@media (max-width: 860px) {
+@media screen and (max-width: 860px) {
   .offering {
     grid-template-columns: 1fr;
   }
@@ -553,13 +553,13 @@ blockquote {
   color: var(--ivory);
 }
 
-@media (max-width: 860px) {
+@media screen and (max-width: 860px) {
   .timeline {
     grid-template-columns: 1fr 1fr;
   }
 }
 
-@media (max-width: 480px) {
+@media screen and (max-width: 480px) {
   .timeline {
     grid-template-columns: 1fr;
   }
@@ -573,7 +573,7 @@ blockquote {
   gap: clamp(2rem, 6vw, 5rem);
 }
 
-@media (max-width: 860px) {
+@media screen and (max-width: 860px) {
   .contact-grid {
     grid-template-columns: 1fr;
   }
@@ -715,7 +715,7 @@ textarea {
   opacity: 0.7;
 }
 
-@media (max-width: 760px) {
+@media screen and (max-width: 760px) {
   .site-footer .wrap {
     grid-template-columns: 1fr;
   }
@@ -744,7 +744,7 @@ textarea {
   line-height: 1.2;
 }
 
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
   .stats {
     grid-template-columns: 1fr;
   }
@@ -794,7 +794,7 @@ textarea {
   display: block;
 }
 
-@media (max-width: 420px) {
+@media screen and (max-width: 420px) {
   .site-header .brand .wordmark {
     height: 30px;
   }
@@ -839,8 +839,138 @@ textarea {
   background: var(--ivory);
 }
 
-@media (min-width: 761px) {
+@media print, (min-width: 761px) {
   .header-tools {
     margin-left: 1.75rem;
+  }
+}
+
+/* ---------- Print ----------
+   Paper keeps the desktop layout (the narrow-screen rules above are
+   screen-only) but drops background fills to save ink. */
+
+.print-only {
+  display: none;
+}
+
+@media print {
+  @page {
+    margin: 14mm 12mm;
+  }
+
+  html {
+    font-size: 13px;
+  }
+
+  body,
+  .site-header,
+  .bg-ivory,
+  .bg-sage,
+  .bg-teal,
+  .site-footer,
+  .card,
+  .channels a,
+  form,
+  input,
+  select,
+  textarea {
+    background: none !important;
+    backdrop-filter: none;
+  }
+
+  .screen-only,
+  .nav-toggle {
+    display: none !important;
+  }
+
+  .print-only {
+    display: initial;
+  }
+
+  .site-header {
+    position: static;
+  }
+
+  section {
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--beige);
+  }
+
+  .hero {
+    border-top: 0;
+  }
+
+  /* Light-on-teal sections become teal-on-white */
+  .bg-teal,
+  .site-footer {
+    color: var(--ink);
+  }
+
+  .bg-teal h2,
+  .bg-teal h3,
+  .timeline strong,
+  .site-footer a,
+  .site-footer .brand {
+    color: var(--teal);
+  }
+
+  .timeline {
+    color: var(--ink-soft);
+  }
+
+  .site-footer .legal {
+    border-top-color: var(--beige);
+  }
+
+  /* Filled shapes become outlines */
+  .btn-primary {
+    background: none;
+    color: var(--rust);
+    border-color: var(--rust);
+  }
+
+  .card .icon,
+  .channels .icon {
+    background: none;
+    border: 1.5px solid currentColor;
+  }
+
+  .i-rust {
+    color: var(--rust) !important;
+  }
+
+  .i-sage {
+    color: var(--sage) !important;
+  }
+
+  .i-ochre {
+    color: var(--ochre) !important;
+  }
+
+  .photo {
+    background: none;
+  }
+
+  .photo-band {
+    height: 70mm;
+  }
+
+  /* Keep blocks whole across pages */
+  .card,
+  .offering,
+  .photo,
+  .timeline li,
+  .channels li,
+  form,
+  blockquote,
+  .stats {
+    break-inside: avoid;
+  }
+
+  h1,
+  h2,
+  h3,
+  .eyebrow {
+    break-after: avoid;
   }
 }

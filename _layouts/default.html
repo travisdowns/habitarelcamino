@@ -64,8 +64,10 @@
     <div class="wrap">
       <div>
         <a class="brand" href="{{ t.home_url | relative_url }}" aria-label="{{ t.home_label }}">
-          <img class="mark" src="{{ '/assets/img/mark-ivory.png' | relative_url }}" alt="">
-          <img class="wordmark" src="{{ '/assets/img/wordmark-ivory.png' | relative_url }}" alt="Habitar el Camino">
+          <img class="mark screen-only" src="{{ '/assets/img/mark-ivory.png' | relative_url }}" alt="">
+          <img class="wordmark screen-only" src="{{ '/assets/img/wordmark-ivory.png' | relative_url }}" alt="Habitar el Camino">
+          <img class="mark print-only" src="{{ '/assets/img/mark-teal.png' | relative_url }}" alt="">
+          <img class="wordmark print-only" src="{{ '/assets/img/wordmark-teal.png' | relative_url }}" alt="Habitar el Camino">
         </a>
         <p style="margin-top:1rem">{{ t.footer_tagline }}</p>
       </div>
