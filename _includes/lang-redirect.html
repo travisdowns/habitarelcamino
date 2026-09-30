@@ -1,0 +1,19 @@
+  <script>
+    // Runs only on the Spanish home page. A language picked with the switcher
+    // (stored by site.js) always wins; with no stored choice, visitors whose
+    // browser lists no Spanish at all are sent to the English home.
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem("hec-lang"); } catch (e) {}
+      if (saved === "es") return;
+      if (saved !== "en") {
+        if (/bot|crawl|spider|slurp|facebookexternalhit|whatsapp/i.test(navigator.userAgent)) return;
+        var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""];
+        for (var i = 0; i < langs.length; i++) {
+          if (/^es\b/i.test(langs[i])) return;
+        }
+        if (!langs[0]) return;
+      }
+      location.replace("{{ '/en/' | relative_url }}" + location.search + location.hash);
+    })();
+  </script>

@@ -1,0 +1,96 @@
+{%- assign t = site.data.i18n[page.lang] -%}
+{%- assign other_lang = "en" -%}
+{%- if page.lang == "en" %}{% assign other_lang = "es" %}{% endif -%}
+{%- assign translations = site.pages | where: "ref", page.ref -%}
+{%- assign alt = translations | where: "lang", other_lang | first -%}
+{%- assign es_page = translations | where: "lang", "es" | first -%}
+<!doctype html>
+<html lang="{{ page.lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {%- if page.lang == "es" and page.ref == "home" %}
+  {%- include lang-redirect.html %}
+  {%- endif %}
+  <title>{% if page.full_title %}{{ page.full_title }}{% else %}{{ page.title }} | {{ site.title }}{% endif %}</title>
+  <meta name="description" content="{{ page.description }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  {%- for p in translations %}
+  <link rel="alternate" hreflang="{{ p.lang }}" href="{{ p.url | absolute_url }}">
+  {%- endfor %}
+  {%- if es_page %}
+  <link rel="alternate" hreflang="x-default" href="{{ es_page.url | absolute_url }}">
+  {%- endif %}
+  <meta property="og:title" content="{% if page.full_title %}{{ site.title }}{% else %}{{ page.title }} | {{ site.title }}{% endif %}">
+  <meta property="og:description" content="{{ page.description }}">
+  <meta property="og:image" content="{{ '/assets/img/og.jpg' | absolute_url }}">
+  <meta property="og:locale" content="{% if page.lang == 'es' %}es_CL{% else %}en_US{% endif %}">
+  <link rel="icon" href="{{ '/assets/favicon.png' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/assets/img/apple-touch-icon.png' | relative_url }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,300..500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/css/style.css' | relative_url }}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="{{ t.home_url | relative_url }}" aria-label="{{ t.home_label }}">
+        <img class="mark" src="{{ '/assets/img/mark-teal.png' | relative_url }}" alt="">
+        <img class="wordmark" src="{{ '/assets/img/wordmark-teal.png' | relative_url }}" alt="Habitar el Camino">
+      </a>
+      <div class="header-tools">
+        {%- if alt %}
+        <a class="lang-switch" href="{{ alt.url | relative_url }}" hreflang="{{ other_lang }}" lang="{{ other_lang }}" data-lang="{{ other_lang }}" aria-label="{{ t.switch_label }}">{{ other_lang | upcase }}</a>
+        {%- endif %}
+        <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">{{ t.menu }}</button>
+      </div>
+      <nav class="site-nav" id="site-nav">
+        <ul>
+          {%- for item in t.nav %}
+          {%- assign target = site.pages | where: "ref", item.ref | where: "lang", page.lang | first %}
+          <li><a href="{{ target.url | relative_url }}"{% if item.ref == page.ref %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+          {%- endfor %}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+{{ content }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        <a class="brand" href="{{ t.home_url | relative_url }}" aria-label="{{ t.home_label }}">
+          <img class="mark" src="{{ '/assets/img/mark-ivory.png' | relative_url }}" alt="">
+          <img class="wordmark" src="{{ '/assets/img/wordmark-ivory.png' | relative_url }}" alt="Habitar el Camino">
+        </a>
+        <p style="margin-top:1rem">{{ t.footer_tagline }}</p>
+      </div>
+      <div>
+        <h4>{{ t.explore }}</h4>
+        <ul>
+          {%- for item in t.nav offset: 1 %}
+          {%- assign target = site.pages | where: "ref", item.ref | where: "lang", page.lang | first %}
+          <li><a href="{{ target.url | relative_url }}">{{ item.label }}</a></li>
+          {%- endfor %}
+        </ul>
+      </div>
+      <div>
+        <h4>{{ t.connect }}</h4>
+        <ul>
+          <li><a href="https://wa.me/56940502797">WhatsApp</a></li>
+          <li><a href="mailto:cpcasascordero@gmail.com">cpcasascordero@gmail.com</a></li>
+          {%- if alt %}
+          <li><a href="{{ alt.url | relative_url }}" hreflang="{{ other_lang }}" lang="{{ other_lang }}" data-lang="{{ other_lang }}">{{ t.switch_label }}</a></li>
+          {%- endif %}
+        </ul>
+      </div>
+      <p class="legal">© {{ site.time | date: "%Y" }} Habitar el Camino · Carolina Casas-Cordero</p>
+    </div>
+  </footer>
+  <script src="{{ '/js/site.js' | relative_url }}"></script>
+</body>
+</html>

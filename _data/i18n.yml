@@ -1,0 +1,27 @@
+# Interface strings per language. Page bodies live in the pages themselves.
+es:
+  home_url: /
+  nav:
+    - { ref: home, label: Inicio }
+    - { ref: offerings, label: Terapias }
+    - { ref: about, label: Sobre mí }
+    - { ref: contact, label: Contacto }
+  menu: Menú
+  home_label: Habitar el Camino, inicio
+  switch_label: Read in English
+  footer_tagline: Facilitación holística en Puerto Varas, Chile, y en línea.
+  explore: Explora
+  connect: Conecta
+en:
+  home_url: /en/
+  nav:
+    - { ref: home, label: Home }
+    - { ref: offerings, label: Offerings }
+    - { ref: about, label: About me }
+    - { ref: contact, label: Contact }
+  menu: Menu
+  home_label: Habitar el Camino, home
+  switch_label: Leer en español
+  footer_tagline: Holistic facilitation in Puerto Varas, Chile, and online.
+  explore: Explore
+  connect: Connect

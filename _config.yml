@@ -1,0 +1,8 @@
+title: Habitar el Camino
+url: https://habitarelcamino.com
+permalink: pretty
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - README.md
