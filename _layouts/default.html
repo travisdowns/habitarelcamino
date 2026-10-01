@@ -89,7 +89,7 @@
           {%- endif %}
         </ul>
       </div>
-      <p class="legal">© {{ site.time | date: "%Y" }} Habitar el Camino · Carolina Casas-Cordero</p>
+      <p class="legal">© {{ site.time | date: "%Y" }} Habitar el Camino · Carolina Casas-Cordero{% if page.ref == "home" and site.github.build_revision %}<span class="rev">{{ site.github.build_revision | slice: 0, 7 }}</span>{% endif %}</p>
     </div>
   </footer>
   <script src="{{ '/js/site.js' | relative_url }}"></script>

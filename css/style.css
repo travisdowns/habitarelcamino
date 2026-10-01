@@ -736,6 +736,13 @@ textarea {
   opacity: 0.7;
 }
 
+.site-footer .legal .rev {
+  float: right;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  opacity: 0.45;
+}
+
 @media screen and (max-width: 760px) {
   .site-footer .wrap {
     grid-template-columns: 1fr;
